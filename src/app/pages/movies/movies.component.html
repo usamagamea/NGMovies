@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="grid">
+    <div class="col-6 md:col-3 lg:col-3" *ngFor="let movie of movies.data ">
+      <item [itemData]="movie"></item>
+    </div>
+  </div>
+  <div>
+    <mat-paginator [pageSize]="1" (page)="getServerData($event)">
+    </mat-paginator>
+  </div>
+</div>
+<!-- moviesLength -->
