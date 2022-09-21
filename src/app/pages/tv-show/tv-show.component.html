@@ -1,46 +1,46 @@
-<ng-container *ngIf="movie">
-  <slider [items]="[movie]" [isBanner]="true"></slider>
+<ng-container *ngIf="tv">
+  <slider *ngIf="tvShowBanner" [items]="[tvShowBanner]" [isBanner]="true"></slider>
   <p-tabView>
     <p-tabPanel header="Overview">
       <div class="grid">
         <div class="col-12 md:col-3 lg:col-3">
-          <img class="poster" [src]="picSize.large + movie.poster_path" [alt]="movie.title">
+          <img class="poster" [src]="picSize.large + tv.poster_path" [alt]="tv.name">
 
         </div>
         <div class="col-12 md:col-9 lg:col-9">
           <h2 class="heading">Overview</h2>
-          <p class="overview">{{movie.overview}}</p>
-          <div class="stat">
+          <p class="overview">{{tv.overview}}</p>
+          <!-- <div class="stat">
             <div class="label">
               Release Date :
             </div>
             <div class="value">
-              {{movie.release_date | date : 'MMM dd, yyyy'}}
+              {{tv.release_date | date : 'MMM dd, yyyy'}}
 
             </div>
-          </div>
+          </div> -->
           <div class="stat">
             <div class="label">
               Language :
             </div>
             <div class="value">
-              {{movie.original_language | uppercase}}
+              {{tv.original_language | uppercase}}
             </div>
           </div>
-          <div class="stat">
+          <!-- <div class="stat">
             <div class="label">
               Revenue :
             </div>
             <div class="value">
-              {{movie.revenue | currency : 'USD'}}
+              {{tv.revenue | currency : 'USD'}}
             </div>
-          </div>
+          </div> -->
           <div class="stat">
             <div class="label">
               Duration :
             </div>
             <div class="value">
-              {{movie.runtime}} min
+              {{tv.runtime}} min
             </div>
           </div>
           <div class="stat">
@@ -48,7 +48,7 @@
               Status :
             </div>
             <div class="value">
-              {{movie.status}}
+              {{tv.status}}
             </div>
           </div>
           <div class="stat">
@@ -56,7 +56,7 @@
               Genres :
             </div>
             <div class="value">
-              <span *ngFor="let genre of movie.genres">
+              <span *ngFor="let genre of tv.genres">
                 {{genre.name}}
               </span>
             </div>
@@ -67,7 +67,7 @@
     <p-tabPanel header="Video">
       <h2 class="heading text-center">Videos</h2>
       <div class="grid">
-        <ng-container *ngFor="let video of moviesVideo">
+        <ng-container *ngFor="let video of tvVideo">
           <div class="col-12 md:col-4 lg:col-4">
             <video-embed [key]="video.key" [site]="video.site"></video-embed>
           </div>
@@ -79,9 +79,9 @@
     <p-tabPanel header="Photos">
       <h2 class="heading text-center">Photos</h2>
       <div class="grid">
-        <ng-container *ngFor="let movieImage of movieImages?.backdrops">
+        <ng-container *ngFor="let tvImage of tvImages?.backdrops">
           <div class="col-12 md:col-4 lg:col-4">
-            <p-image [src]="picSize.original + movieImage.file_path" [alt]="movie.title" width="100%" [preview]="true">
+            <p-image [src]="picSize.original + tvImage.file_path" [alt]="tv.name" width="100%" [preview]="true">
             </p-image>
           </div>
         </ng-container>
@@ -89,9 +89,10 @@
 
     </p-tabPanel>
   </p-tabView>
-  <p-carousel [numVisible]="5" *ngIf="movieCredits" [value]="movieCredits.cast">
+  <p-carousel [numVisible]="5" *ngIf="tvCredits" [value]="tvCredits.cast">
     <ng-template let-actor pTemplate="item">
       <div class="actor">
+        <h3 class="heading">Actor</h3>
         <ng-container *ngIf="actor.profile_path!=null">
           <img [src]="picSize.medium + actor.profile_path" [alt]="actor.name">
         </ng-container>
@@ -103,5 +104,8 @@
       </div>
     </ng-template>
   </p-carousel>
-  <item-banner [items]="similarMovies" title="Similar Movies"></item-banner>
+  <!-- <div class="container">
+    <h2 class="heading">Similar Tv Shows</h2>
+    <item-banner-tv [itemsTv]="similarTv"></item-banner-tv>
+  </div> -->
 </ng-container>

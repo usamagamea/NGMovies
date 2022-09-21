@@ -1,6 +1,16 @@
 <div class="container">
   <div class="grid">
-    <div class="col-6 md:col-3 lg:col-3" *ngFor="let movie of movies.data ">
+    <div class="col-6">
+      <div class="p-fluid">
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input type="text" pInputText placeholder="Search" [(ngModel)]="searchMovie" (change)="searchMovies()">
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="col-6 md:col-3 lg:col-3" *ngFor="let movie of MoviesPagination.data ">
       <item [itemData]="movie"></item>
     </div>
   </div>
@@ -9,4 +19,3 @@
     </mat-paginator>
   </div>
 </div>
-<!-- moviesLength -->

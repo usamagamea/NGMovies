@@ -20,6 +20,19 @@ export interface Movie {
   genres: Genre[];
 }
 
+export interface Item {
+  id: number;
+  poster_path: string;
+  title: string;
+  name?: string;
+  vote_average: number;
+  backdrop_path: string;
+  vote_count: number;
+  release_date: string;
+  overview: string;
+  routePath?: string;
+}
+
 export interface MovieDto {
   page: number;
   total_results: number;
@@ -54,3 +67,18 @@ export interface MovieCredits {
     profile_path: string;
   }[];
 }
+
+export const mapMovieToItem = (movie: Movie): Item => {
+  return {
+    id: movie.id,
+    title: movie.title,
+    name: movie.name,
+    poster_path: movie.poster_path,
+    vote_average: movie.vote_average,
+    backdrop_path: movie.backdrop_path,
+    vote_count: movie.vote_count,
+    release_date: movie.release_date,
+    overview: movie.overview,
+    routePath: '/movie/' + movie.id,
+  };
+};

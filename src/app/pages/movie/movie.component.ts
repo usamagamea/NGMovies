@@ -4,12 +4,11 @@ import {
   MovieImages,
   MovieVideo,
   MovieCredits,
-  MovieDto,
 } from './../../models/movies';
 import { MoviesService } from './../../services/movies.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { first } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-movie',
@@ -21,16 +20,16 @@ export class MovieComponent implements OnInit, OnDestroy {
   moviesVideo: MovieVideo[] = [];
   movieImages: MovieImages | null = null;
   movieCredits: MovieCredits | null = null;
-  similarMovies: MovieDto | null = null;
-
+  similarMovies: Movie[] = [];
   picSize = ImagesSize;
+  unSub: Subscription = new Subscription();
   constructor(
     private route: ActivatedRoute,
     private moviesService: MoviesService
   ) {}
 
   ngOnInit(): void {
-    this.route.params.pipe(first()).subscribe(({ id }) => {
+    this.route.params.pipe().subscribe(({ id }) => {
       this.getMovie(id);
       this.getMovieVideos(id);
       this.getMoviesImages(id);
@@ -39,7 +38,7 @@ export class MovieComponent implements OnInit, OnDestroy {
     });
   }
   ngOnDestroy(): void {
-    console.log('component destroyed');
+    this.unSub.unsubscribe();
   }
 
   getMovie(id: string) {

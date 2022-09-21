@@ -21,6 +21,11 @@ import { TabViewModule } from 'primeng/tabview';
 import { VideoEmbedComponent } from './components/video-embed/video-embed.component';
 import { ImageModule } from 'primeng/image';
 import { CarouselModule } from 'primeng/carousel';
+import { InputTextModule } from 'primeng/inputtext';
+import { FormsModule } from '@angular/forms';
+import { TvShowComponent } from './pages/tv-show/tv-show.component';
+import { ItemTvComponent } from './components/item-tv/item-tv.component';
+import { ItemBannerTvComponent } from './components/item-banner-tv/item-banner-tv.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +41,9 @@ import { CarouselModule } from 'primeng/carousel';
     ItemComponent,
     MovieComponent,
     VideoEmbedComponent,
+    TvShowComponent,
+    ItemTvComponent,
+    ItemBannerTvComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +56,8 @@ import { CarouselModule } from 'primeng/carousel';
     TabViewModule,
     ImageModule,
     CarouselModule,
+    InputTextModule,
+    FormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

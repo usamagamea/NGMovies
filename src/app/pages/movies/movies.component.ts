@@ -12,49 +12,62 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./movies.component.scss'],
 })
 export class MoviesComponent implements OnInit {
-  movies = new MatTableDataSource<any>();
-  // @ViewChild(MatSort, { static: true }) sort: MatSort | undefined;
+  @ViewChild(MatSort, { static: true }) sort: MatSort | undefined;
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
-  moviesLength!: number;
-
-  // movies2: Movie[] = [];
-
+  MoviesPagination = new MatTableDataSource<any>();
+  generalId: string | null = null;
+  moviesLength: Movie[] = [];
+  searchMovie: string | null = null;
   constructor(
     private moviesService: MoviesService,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    // this.route.params.pipe(take(1)).subscribe(({ genreId }) => {
-    //   if (genreId) {
-    //     this.getMoviesByGenre(genreId);
-    //   } else {
-    //   }
-    // });
-    this.getPagedMovies(1);
+    this.route.params.pipe(take(1)).subscribe(({ genreId }) => {
+      if (genreId) {
+        this.generalId = genreId;
+        this.getMoviesByGenre(genreId, 1);
+      } else {
+        this.getPagedMovies(1);
+      }
+    });
   }
 
   ngAfterViewInit() {
-    this.movies.paginator = this.paginator;
+    this.MoviesPagination.paginator = this.paginator;
   }
 
-  getPagedMovies(page: number) {
-    this.moviesService.searchMovies(page).subscribe((movies) => {
-      this.movies.data = movies.results;
+  getPagedMovies(page: number, search?: string) {
+    this.moviesService.searchMovies(page, search).subscribe((movies) => {
+      this.MoviesPagination.data = movies.results;
       this.moviesLength ? this.moviesLength : movies.total_results;
     });
   }
 
-  // getMoviesByGenre(genreId: string) {
-  //   this.moviesService.getMoviesByGenre(genreId).subscribe((movies) => {
-  //     // this.movies.data = movies;
-  //     this.movies.data = movies;
-
-  //     this.moviesLength ? this.moviesLength : movies;
-  //   });
-  // }
+  getMoviesByGenre(genreId: string, page: number) {
+    this.moviesService.getMoviesByGenre(genreId, page).subscribe((movies) => {
+      this.MoviesPagination.data = movies;
+      this.moviesLength ? this.moviesLength : movies;
+    });
+  }
 
   getServerData(event: any) {
-    this.getPagedMovies(event.pageIndex + 1);
+    const page = event.pageIndex + 1;
+    if (this.generalId) {
+      this.getMoviesByGenre(this.generalId, page);
+    } else {
+      if (this.searchMovie) {
+        this.getPagedMovies(page, this.searchMovie);
+      } else {
+        this.getPagedMovies(page);
+      }
+    }
+  }
+
+  searchMovies() {
+    if (this.searchMovie) {
+      this.getPagedMovies(1, this.searchMovie);
+    }
   }
 }
