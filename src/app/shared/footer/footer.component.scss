@@ -4,9 +4,13 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+  align-self: end;
   padding: 0.5rem 1rem;
   background-color: $bgLight;
   height: 65px;
-  margin: 0;
+  bottom: 0;
+  margin-bottom: 0;
   text-transform: capitalize;
+  font-size: 0.8rem;
+
 }

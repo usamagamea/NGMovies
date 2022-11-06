@@ -1,0 +1,30 @@
+:host {
+  width: 100%;
+
+  @media (min-width: 992px) {
+    .login-form {
+      width: 100%;
+      max-width: 450px;
+
+      .mat-form-field {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.icon-custom {
+  position: absolute;
+  top: 50%;
+  transform: translate(-200%, -50%);
+}
+
+// Validation
+.is-valid {
+  border-color: #28a745;
+
+}
+
+.is-invalid {
+  border-color: #dc3545;
+}

@@ -1,0 +1,51 @@
+<header>
+  <h3 class="text-center">Add Movie to Watch</h3>
+</header>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="Name">Name</label>
+    <input type="text" class="form-control" id="Name" formControlName="name" placeholder="Name">
+    <div *ngIf="form.get('name')?.invalid && form.get('name')?.touched" class="my-1 alert alert-danger">
+      <div *ngIf="form.get('name')?.errors?.required">
+        Name is required.
+      </div>
+      <div *ngIf="form?.get('name')?.hasError('pattern')" class="error">
+        that's not a valid Name
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <input type="text" class="form-control" id="description" formControlName="description" placeholder="Description">
+    <div *ngIf="form.get('description')?.invalid && form.get('description')?.touched" class="my-1 alert alert-danger">
+      <div *ngIf="form.get('description')?.errors?.required">
+        Description is required.
+      </div>
+      <div *ngIf="form?.get('description')?.hasError('pattern')" class="error">
+        that's not a valid description
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="image">Image</label>
+    <input type="text" class="form-control" id="image" formControlName="image" placeholder="Image">
+    <div *ngIf="form.get('image')?.invalid && form.get('image')?.touched" class="my-1 alert alert-danger">
+      <div *ngIf="form.get('image')?.errors?.required">
+        Image is required.
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="category_id">Category</label>
+    <select class="form-control" id="category_id" formControlName="category_id">
+      <option *ngFor="let category of MovieList" [value]="category.message.id">{{category.message.id}}</option>
+    </select>
+    <div *ngIf="form.get('category_id')?.invalid && form.get('category_id')?.touched" class="my-1 alert alert-danger">
+      <div *ngIf="form.get('category_id')?.errors?.required">
+        Category is required.
+      </div>
+    </div>
+  </div>
+  <button type="submit" class="btn w-25 btn-primary">Save</button>
+</form>
+<!-- [disabled]="form.invalid" -->

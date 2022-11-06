@@ -1,0 +1,92 @@
+<!--start::Form-->
+<!--  -->
+<form class="form-group" [formGroup]="loginForm" (ngSubmit)="submit(loginForm)">
+  <!--begin::Heading-->
+  <div class="text-center mb-10">
+    <h1 class="text-dark mb-3">Login</h1>
+    <div class="text-gray-400 fw-bold fs-4">
+      New Here?
+      <a routerLink="/register" class="link-primary fw-bolder">Sign up</a>
+    </div>
+  </div>
+  <!--end::Heading-->
+
+  <div class="container d-flex flex-column w-100">
+    <!-- begin::Alert error-->
+    <ng-container *ngIf="hasError">
+      <div class="mb-lg-15 alert alert-danger">
+        <div class="alert-text font-weight-bold">{{ errorMessage }}</div>
+      </div>
+    </ng-container>
+    <!-- end::Alert error-->
+    <!--begin::Form group-->
+    <div class="form-group ">
+      <label class="form-label fs-6 fw-bolder text-dark">
+        Email
+      </label>
+      <input class="form-control form-control-lg form-control-solid" type="email" name="email" formControlName="email"
+        autocomplete="off" />
+      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+        validation: 'required',
+        message:
+          'Your email is required'
+          ,
+        control: loginForm.controls['email']
+      }"></ng-container>
+      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+        validation: 'email',
+        message:
+          'Your email is invalid'
+            ,
+        control: loginForm.controls['email']
+      }"></ng-container>
+    </div>
+    <!--end::Form group-->
+
+    <!--begin::Form group-->
+    <div class="form-group">
+
+      <label class="form-label fw-bolder text-dark fs-6">
+        Password
+      </label>
+      <div class="d-flex flex-row">
+        <input class="form-control form-control-lg form-control-solid" [type]="fieldConfirm ? 'text' : 'password'"
+          type="password" name="password" autocomplete="off" formControlName="password" />
+        <div class="position-relative">
+          <span class="icon-custom" (click)="toggleConfirm()">
+            <span *ngIf="!fieldConfirm">
+              <i class="fa fa-eye text-primary mt-1"></i>
+            </span>
+            <span *ngIf="fieldConfirm">
+              <i class="fa fa-eye-slash text-primary mt-1"></i>
+            </span>
+          </span>
+        </div>
+      </div>
+
+      <ng-container [ngTemplateOutlet]="formError" [ngTemplateOutletContext]="{
+            validation: 'required',
+            message:
+              'Your password is required',
+            control: loginForm.controls['password']
+          }"></ng-container>
+
+    </div>
+    <!--end::Form group-->
+    <!--begin::Action-->
+    <div class="d-flex justify-content-center">
+      <button type="submit" [disabled]="loginForm.invalid" class="btn btn-lg btn-primary w-100 mb-5">Login</button>
+    </div>
+    <!--end::Action-->
+  </div>
+</form>
+<!--end::Form-->
+<ng-template #formError let-control="control" let-message="message" let-validation="validation">
+  <ng-container *ngIf="control.hasError(validation) && (control.dirty || control.touched)">
+    <div class="fv-plugins-message-container">
+      <span role="alert" class="fv-help-block">
+        {{ message }}
+      </span>
+    </div>
+  </ng-container>
+</ng-template>

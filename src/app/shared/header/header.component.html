@@ -4,10 +4,15 @@
       <img src="assets/images/logo.png">
     </a>
     <ul class="navbar-links">
-      <li><a routerLink="">Home</a></li>
-      <li><a routerLink="movies">Movies</a></li>
-      <li><a routerLink="tv-shows">TV Shows</a></li>
-      <li><a routerLink="genres">Genres</a></li>
+      <li><a routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" routerLink="">Home</a></li>
+      <span *ngIf="isLogin">
+        <li><a routerLinkActive="active" routerLink="movies">Movies</a></li>
+        <li><a routerLinkActive="active" routerLink="tv-shows">TV Shows</a></li>
+        <li><a routerLinkActive="active" routerLink="genres">Genres</a></li>
+        <li><a routerLinkActive="active" routerLink="list">List</a></li>
+        <li><a href="#" (click)="logout()">Logout</a></li>
+      </span>
+      <li><a *ngIf="!isLogin" routerLinkActive="active" routerLink="login">Login</a></li>
     </ul>
   </nav>
 </header>

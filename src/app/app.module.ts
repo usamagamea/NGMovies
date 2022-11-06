@@ -22,10 +22,13 @@ import { VideoEmbedComponent } from './components/video-embed/video-embed.compon
 import { ImageModule } from 'primeng/image';
 import { CarouselModule } from 'primeng/carousel';
 import { InputTextModule } from 'primeng/inputtext';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TvShowComponent } from './pages/tv-show/tv-show.component';
 import { ItemTvComponent } from './components/item-tv/item-tv.component';
 import { ItemBannerTvComponent } from './components/item-banner-tv/item-banner-tv.component';
+import { LoginComponent } from './security/login/login.component';
+import { RegisterComponent } from './security/register/register.component';
+import { CrudMovieModule } from './crud-movie/crud-movie.module';
 
 @NgModule({
   declarations: [
@@ -44,12 +47,15 @@ import { ItemBannerTvComponent } from './components/item-banner-tv/item-banner-t
     TvShowComponent,
     ItemTvComponent,
     ItemBannerTvComponent,
+    LoginComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
+    ReactiveFormsModule,
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
@@ -58,6 +64,7 @@ import { ItemBannerTvComponent } from './components/item-banner-tv/item-banner-t
     CarouselModule,
     InputTextModule,
     FormsModule,
+    CrudMovieModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
