@@ -23,9 +23,7 @@ export class LoginComponent implements OnInit {
     this.fieldConfirm = !this.fieldConfirm;
   }
 
-  ngOnInit(): void {
-    this.submit(this.loginForm);
-  }
+  ngOnInit(): void {}
   submit(loginForm: FormGroup) {
     if (loginForm.valid) {
       this.auth.login(loginForm.value).subscribe({

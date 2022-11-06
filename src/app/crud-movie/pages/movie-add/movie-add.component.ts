@@ -10,7 +10,7 @@ import { CrudService } from './../../services/crud.service';
   styleUrls: ['./movie-add.component.scss'],
 })
 export class MovieAddComponent implements OnInit {
-  MovieList: CatDto[] = [];
+  MovieList: any[] = [];
 
   constructor(private formBuilder: FormBuilder, private crud: CrudService) {}
   form: FormGroup = new FormGroup({
@@ -51,6 +51,7 @@ export class MovieAddComponent implements OnInit {
   getLists() {
     this.crud.getMovies().subscribe((category) => {
       this.MovieList = category;
+      console.log('testtttttt', this.MovieList);
     });
   }
 }

@@ -12,7 +12,7 @@ import { CatDto } from './../models/list';
 })
 export class CrudService {
   apiDomain = environment.apiDomain;
-  authToken = this.auth.token;
+  authToken = this.auth.getAuthToken();
   headers = new HttpHeaders().set('Authorization', `bearer${this.authToken}`);
   constructor(private http: HttpClient, private auth: AuthService) {}
   createForm(form: MediaItem): Observable<MediaItem[]> {

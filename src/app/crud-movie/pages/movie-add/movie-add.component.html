@@ -38,7 +38,7 @@
   <div class="form-group">
     <label for="category_id">Category</label>
     <select class="form-control" id="category_id" formControlName="category_id">
-      <option *ngFor="let category of MovieList" [value]="category.message.id">{{category.message.id}}</option>
+      <option *ngFor="let category of MovieList">{{category}}</option>
     </select>
     <div *ngIf="form.get('category_id')?.invalid && form.get('category_id')?.touched" class="my-1 alert alert-danger">
       <div *ngIf="form.get('category_id')?.errors?.required">

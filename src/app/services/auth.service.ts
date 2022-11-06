@@ -11,15 +11,15 @@ jwtDecode;
 export class AuthService {
   currentUser = new BehaviorSubject(null);
   apiDomain = environment.apiDomain;
-  token: any = localStorage.getItem('userToken');
 
   constructor(private http: HttpClient, private route: Router) {
-    if (this.token !== null) {
+    if (localStorage.getItem('userToken') !== null) {
       this.saveCurrentUser();
     }
   }
   saveCurrentUser() {
-    this.currentUser.next(jwtDecode(this.token));
+    const token: any = this.getAuthToken();
+    this.currentUser.next(jwtDecode(token));
   }
 
   login(data: any) {
@@ -32,5 +32,8 @@ export class AuthService {
     localStorage.removeItem('userToken');
     this.currentUser.next(null);
     this.route.navigate(['home']);
+  }
+  getAuthToken() {
+    return localStorage.getItem('userToken');
   }
 }
