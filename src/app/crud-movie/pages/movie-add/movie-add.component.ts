@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CatDto, listDto } from '../../models/list';
-import { MediaItem } from '../../models/media-items';
 import { CrudService } from './../../services/crud.service';
 
 @Component({
@@ -10,7 +9,7 @@ import { CrudService } from './../../services/crud.service';
   styleUrls: ['./movie-add.component.scss'],
 })
 export class MovieAddComponent implements OnInit {
-  MovieList: any[] = [];
+  messageList: listDto[] = [];
 
   constructor(private formBuilder: FormBuilder, private crud: CrudService) {}
   form: FormGroup = new FormGroup({
@@ -49,9 +48,8 @@ export class MovieAddComponent implements OnInit {
   }
 
   getLists() {
-    this.crud.getMovies().subscribe((category) => {
-      this.MovieList = category;
-      console.log('testtttttt', this.MovieList);
+    this.crud.getMovies().subscribe((category: any) => {
+      this.messageList = category.message as listDto[];
     });
   }
 }
