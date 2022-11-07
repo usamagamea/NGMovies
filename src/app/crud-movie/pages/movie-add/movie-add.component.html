@@ -28,7 +28,7 @@
   </div>
   <div class="form-group">
     <label for="image">Image</label>
-    <input type="text" class="form-control" id="image" formControlName="image" placeholder="Image">
+    <input type="file" class="form-control" id="image" formControlName="image" placeholder="Image">
     <div *ngIf="form.get('image')?.invalid && form.get('image')?.touched" class="my-1 alert alert-danger">
       <div *ngIf="form.get('image')?.errors?.required">
         Image is required.
@@ -38,7 +38,7 @@
   <div class="form-group">
     <label for="category_id">Category</label>
     <select class="form-control" id="category_id" formControlName="category_id">
-      <option *ngFor="let category of messageList">{{category.id}}</option>
+      <option *ngFor="let category of messageList" [value]="category.id">{{category.id}}</option>
     </select>
     <div *ngIf="form.get('category_id')?.invalid && form.get('category_id')?.touched" class="my-1 alert alert-danger">
       <div *ngIf="form.get('category_id')?.errors?.required">
