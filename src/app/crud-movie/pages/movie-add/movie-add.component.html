@@ -28,10 +28,14 @@
   </div>
   <div class="form-group">
     <label for="image">Image</label>
-    <input type="file" class="form-control" id="image" formControlName="image" placeholder="Image">
+    <input type="file" class="form-control" accept=".png, .jpg, .jpeg" id="image" formControlName="image"
+      placeholder="Image">
     <div *ngIf="form.get('image')?.invalid && form.get('image')?.touched" class="my-1 alert alert-danger">
       <div *ngIf="form.get('image')?.errors?.required">
         Image is required.
+      </div>
+      <div *ngIf="form?.get('image')?.hasError('pattern')" class="error">
+        The image must be an image
       </div>
     </div>
   </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CatDto, listDto } from '../../models/list';
+import { Pattern } from '../../models/pattern';
 import { CrudService } from './../../services/crud.service';
 
 @Component({
@@ -29,7 +30,10 @@ export class MovieAddComponent implements OnInit {
     ),
     image: this.formBuilder.control(
       '',
-      Validators.compose([Validators.required])
+      Validators.compose([
+        Validators.required,
+        Validators.pattern(Pattern.ImageValidation),
+      ])
     ),
     category_id: this.formBuilder.control(
       '',
